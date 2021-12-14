@@ -24,6 +24,17 @@ html {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+ main {
+  background-color: #f4f1ec;
+  width: 90%;
+  margin: auto;
+ }
+
+ h1 {
+   font-size: 1.5em;
+ }
