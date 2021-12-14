@@ -15,17 +15,15 @@ label[for="tweet-text"] {
   visibility: hidden;
 }
 
-.new-tweet input {
+.new-tweet textarea {
   width: 100%;
   border: none;
   border-bottom: 4px solid #6d4c3d;
-  padding-bottom: 0.5em;
+  padding-bottom: 0;
   background-color: #f4f1ec;
   margin-bottom: 0.5em;
-}
-
-.new-tweet input:focus-visible {
   outline: none;
+  resize: none;
 }
 
 .new-tweet button{
@@ -43,3 +41,4 @@ label[for="tweet-text"] {
   display: flex;
   justify-content: space-between;
 }
+
