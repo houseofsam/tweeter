@@ -1,0 +1,45 @@
+main .container {
+  width: 100vw;
+}
+
+.new-tweet {
+  width: 90%;
+  margin: auto;
+}
+
+.new-tweet h2 {
+  font-size: 1em;
+}
+
+label[for="tweet-text"] {
+  visibility: hidden;
+}
+
+.new-tweet input {
+  width: 100%;
+  border: none;
+  border-bottom: 4px solid #6d4c3d;
+  padding-bottom: 0.5em;
+  background-color: #f4f1ec;
+  margin-bottom: 0.5em;
+}
+
+.new-tweet input:focus-visible {
+  outline: none;
+}
+
+.new-tweet button{
+  font-family: 'Bungee', cursive;
+  color: #FFFFFF;
+  background-color: #4056A1;
+}
+
+.new-tweet .counter {
+  font-family: 'Bungee', cursive;
+  color: #6d4c3d;
+}
+
+.submit-count {
+  display: flex;
+  justify-content: space-between;
+}
