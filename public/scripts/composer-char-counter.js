@@ -12,7 +12,7 @@ $(document).ready(function() {
     if (remainingChars < 0) {
       $counter.addClass('red');
     } else {
-      $counter.removeClass('red'); 
+      $counter.removeClass('red');
     }
   });
 
