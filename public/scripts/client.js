@@ -20,10 +20,11 @@ $(document).ready(function() {
       url: '/tweets',
       type: 'GET',
     })
-    .done((response) => {
+    .then((response) => {
+      console.log(response);
       renderTweets(response);
     })
-    .fail((error) => {
+    .catch((error) => {
       console.log('error:', error)
     })
   }
@@ -31,6 +32,7 @@ $(document).ready(function() {
   loadTweets();
 
   // Checks whether the avatars property contains an http link or an svg class from one of the project libraries
+  // For instance, this can be a valid avatar property without an http link --> "avatars": "<i class=\"fas fa-user-secret fa-2x\"></i>"
   const avatarType = function(avatar) {
     const regex = new RegExp("^http");
 
@@ -47,10 +49,10 @@ $(document).ready(function() {
           <header>
             ${obj.user.avatars ? avatarType(obj.user.avatars) : '<i class="fas fa-user-secret fa-2x"></i>'}
             <div class="username">
-              ${escape(obj.user.name)}
+              ${obj.user.name}
             </div>
             <div class="user-id">
-              ${escape(obj.user.handle)}
+              ${obj.user.handle}
             </div>
           </header>
 
@@ -76,6 +78,7 @@ $(document).ready(function() {
 
   const renderTweets = function(tweets) {
     // loops through tweets
+    $('#tweets-container').empty();
     for (let tweetObj of tweets) {
       // calls createTweetElement for each tweet
       // takes return value and appends it to the tweets container
@@ -85,15 +88,18 @@ $(document).ready(function() {
   };
 
   // prevent page from navigating upon form submission
+  // alt method: create ID for form and target that instead. 
   $('.new-tweet form').on('submit', function(e) {
     e.preventDefault();
     const $inputField = $(this).find('#tweet-text').val();
 
     // validation for tweet lengths
     if ($inputField.length < 1) {
-      alert('Tweet not sent! Your tweet cannot be blank!');
+      $('#error-exceed').slideUp();
+      $('#error-blank').slideDown();
     } else if ($inputField.length > 140) {
-      alert('Your tweet was not sent because it exceeds the 140 character limit!')
+      $('#error-blank').slideUp();
+      $('#error-exceed').slideDown();
     } else {
       const $formData = $(this).serialize();
       
@@ -103,18 +109,21 @@ $(document).ready(function() {
         type: 'POST',
         data: $formData
       })
-      .done(() => {
+      .then(() => {
+        $('#error-blank').slideUp();
+        $('#error-exceed').slideUp();
         // clear new tweet input field
         $(this).children('#tweet-text').val('');
         // reset counter 
         // (I have a function that does this in the other js file but cant seem to figure out how to import...)
         $(this).find('.counter').html('140');
-        $(this).parent().siblings('#tweets-container').empty();
+
+        // $(this).parent().siblings('#tweets-container').empty();
   
         // fetch tweets from DB and render them to page
         loadTweets();
       })
-      .fail((error) => {
+      .catch((error) => {
         console.log('error:', error)
       })
     }

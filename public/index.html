@@ -57,10 +57,14 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
+        <!-- Error messages set to display none -->
+        <p id="error-exceed"><i class="fas fa-exclamation-triangle"></i> Your tweet was not sent because it exceeds the 140 character limit! <i class="fas fa-exclamation-triangle"></i></p>
+        <p id="error-blank"><i class="fas fa-exclamation-triangle"></i> Tweet not sent! Your tweet cannot be blank! <i class="fas fa-exclamation-triangle"></i></p>
+
         <h2>Compose Tweet</h2>
         <form action="/tweets" method="POST">
           <label for="tweet-text">What are you humming about?</label>
-          <textarea name="text" id="tweet-text" placeholder="What are you humming about?" required></textarea>
+          <textarea name="text" id="tweet-text" placeholder="What are you humming about?"></textarea>
           <div class="submit-count">
             <button type="submit">Tweet</button>
             <output name="counter" class="counter" for="tweet-text">140</output>

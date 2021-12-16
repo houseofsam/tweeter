@@ -48,3 +48,7 @@
 .tweet-actions a:hover{
   color: goldenrod;
 }
+
+.tweet-content {
+  overflow-wrap: break-word;
+}
