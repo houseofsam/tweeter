@@ -5,6 +5,13 @@
  */
 
 $(document).ready(function() {
+  // Function to prevent XSS. createTextNode escapes HTML characters 'e.g. <>'
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
   // Function to asynchronously fetch tweet data from '/tweets' via AJAX GET
   // If successful, it will call the renderTweets function above and pass it the JSON response data that is returned from the request as an argument
   // This function will also be invoked after every successful POST request when a tweet is submitted
@@ -40,15 +47,15 @@ $(document).ready(function() {
           <header>
             ${obj.user.avatars ? avatarType(obj.user.avatars) : '<i class="fas fa-user-secret fa-2x"></i>'}
             <div class="username">
-              ${obj.user.name}
+              ${escape(obj.user.name)}
             </div>
             <div class="user-id">
-              ${obj.user.handle}
+              ${escape(obj.user.handle)}
             </div>
           </header>
 
           <div class="tweet-content">
-            ${obj.content.text}
+            ${escape(obj.content.text)}
           </div>
 
           <footer>
@@ -81,7 +88,6 @@ $(document).ready(function() {
   $('.new-tweet form').on('submit', function(e) {
     e.preventDefault();
     const $inputField = $(this).find('#tweet-text').val();
-    console.log($inputField);
 
     // validation for tweet lengths
     if ($inputField.length < 1) {
@@ -113,7 +119,6 @@ $(document).ready(function() {
       })
     }
   });
-  
   
 
 });
