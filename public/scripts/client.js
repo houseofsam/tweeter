@@ -92,13 +92,12 @@ $(document).ready(function() {
   $('.new-tweet form').on('submit', function(e) {
     e.preventDefault();
     const $inputField = $(this).find('#tweet-text').val();
-
+    $('#error-blank').slideUp();
+    $('#error-exceed').slideUp();
     // validation for tweet lengths
     if ($inputField.length < 1) {
-      $('#error-exceed').slideUp();
       $('#error-blank').slideDown();
     } else if ($inputField.length > 140) {
-      $('#error-blank').slideUp();
       $('#error-exceed').slideDown();
     } else {
       const $formData = $(this).serialize();
@@ -110,16 +109,10 @@ $(document).ready(function() {
         data: $formData
       })
       .then(() => {
-        $('#error-blank').slideUp();
-        $('#error-exceed').slideUp();
         // clear new tweet input field
         $(this).children('#tweet-text').val('');
         // reset counter 
-        // (I have a function that does this in the other js file but cant seem to figure out how to import...)
         $(this).find('.counter').html('140');
-
-        // $(this).parent().siblings('#tweets-container').empty();
-  
         // fetch tweets from DB and render them to page
         loadTweets();
       })
