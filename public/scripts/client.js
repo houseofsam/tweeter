@@ -73,31 +73,45 @@ $(document).ready(function() {
       // calls createTweetElement for each tweet
       // takes return value and appends it to the tweets container
       const $tweet = createTweetElement(tweetObj);
-      $('#tweets-container').append($tweet);
+      $('#tweets-container').prepend($tweet);
     }
   };
 
   // prevent page from navigating upon form submission
   $('.new-tweet form').on('submit', function(e) {
     e.preventDefault();
-    const $formData = $(this).serialize();
-    
-    // asynchronously send the data to server
-    $.ajax({
-      url: '/tweets',
-      type: 'POST',
-      data: $formData
-    })
-    .done(() => {
-      // clear new tweet input field
-      $(this).children('#tweet-text').val('');
-      $(this).parent().siblings('#tweets-container').html('');
-      // fetch tweets from DB and render them to page
-      loadTweets();
-    })
-    .fail((error) => {
-      console.log('error:', error)
-    })
+    const $inputField = $(this).find('#tweet-text').val();
+    console.log($inputField);
+
+    // validation for tweet lengths
+    if ($inputField.length < 1) {
+      alert('Tweet not sent! Your tweet cannot be blank!');
+    } else if ($inputField.length > 140) {
+      alert('Your tweet was not sent because it exceeds the 140 character limit!')
+    } else {
+      const $formData = $(this).serialize();
+      
+      // asynchronously send the data to server
+      $.ajax({
+        url: '/tweets',
+        type: 'POST',
+        data: $formData
+      })
+      .done(() => {
+        // clear new tweet input field
+        $(this).children('#tweet-text').val('');
+        // reset counter 
+        // (I have a function that does this in the other js file but cant seem to figure out how to import...)
+        $(this).find('.counter').html('140');
+        $(this).parent().siblings('#tweets-container').empty();
+  
+        // fetch tweets from DB and render them to page
+        loadTweets();
+      })
+      .fail((error) => {
+        console.log('error:', error)
+      })
+    }
   });
   
   
