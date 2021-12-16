@@ -98,5 +98,27 @@ $(document).ready(function() {
   };
 
   renderTweets(data);
+
+  // prevent page from navigating upon form submission
+  $('.new-tweet form').on('submit', function(e) {
+    e.preventDefault();
+    const $formData = $(this).serialize();
+    console.log($formData);
+    
+    // asynchronously send the data to server
+    $.ajax({
+      url: '/tweets',
+      type: 'POST',
+      data: $formData
+    })
+    .done((response) => {
+      console.log('response:', response);
+      console.log('data:', data);
+    })
+    .fail((error) => {
+      console.log('error:', error)
+    })
+  });
   
+
 });
