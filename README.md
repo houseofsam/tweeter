@@ -3,9 +3,9 @@
 Tweeter is a simple, single-page Twitter clone built with jQuery, HTML, and CSS.
 
 ## Final Product
-!["Screenshot of tweet being typed out with remaining character count displayed"]()
-!["Screenshot of error when user tries to submit empty tweet"]()
-!["Mobile design screenshot of error message when tweet exceeds character count"]()
+!["Screenshot of tweet being typed out with remaining character count displayed"](https://github.com/houseofsam/tweeter/blob/main/docs/tweet-char-counter.png)
+!["Screenshot of error when user tries to submit empty tweet"](https://github.com/houseofsam/tweeter/blob/main/docs/error-tweet-cannot-be-blank.png)
+!["Mobile design screenshot of error message when tweet exceeds character count"](https://github.com/houseofsam/tweeter/blob/main/docs/mobile-error-tweet-exceed-limit.png)
 
 ## Dependencies
 
