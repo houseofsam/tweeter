@@ -21,7 +21,6 @@ $(document).ready(function() {
       type: 'GET',
     })
     .then((response) => {
-      console.log(response);
       renderTweets(response);
     })
     .catch((error) => {
@@ -90,10 +89,13 @@ $(document).ready(function() {
   // prevent page from navigating upon form submission
   // alt method: create ID for form and target that instead. 
   $('.new-tweet form').on('submit', function(e) {
+    // prevent default form behaviour
     e.preventDefault();
     const $inputField = $(this).find('#tweet-text').val();
+    // remove any present error messages upon submit
     $('#error-blank').slideUp();
     $('#error-exceed').slideUp();
+
     // validation for tweet lengths
     if ($inputField.length < 1) {
       $('#error-blank').slideDown();

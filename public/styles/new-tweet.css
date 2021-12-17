@@ -1,7 +1,3 @@
-main .container {
-  width: 100vw;
-}
-
 .new-tweet {
   width: 90%;
   margin: auto;
@@ -9,6 +5,7 @@ main .container {
 
 .new-tweet h2 {
   font-size: 1em;
+  margin-top: 40px;
 }
 
 label[for="tweet-text"] {
