@@ -87,7 +87,6 @@ $(document).ready(function() {
   };
 
   // prevent page from navigating upon form submission
-  // alt method: create ID for form and target that instead. 
   $('.new-tweet form').on('submit', function(e) {
     // prevent default form behaviour
     e.preventDefault();
